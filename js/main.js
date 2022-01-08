@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", function() {
             cookieContainer.classList.add('active');
         }
     }, 2000);
-    // Remove Scripts if cookies already rejected
-    removeScripts();
     // Add Event listeners for buttons
     AcceptButton.addEventListener('click', ()=> {
         removeBanner();
@@ -29,10 +27,16 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem('onlyEssentials','true');
         removeScripts()
     });    
-
-
+    // Remove Scripts if cookies already rejected
+    removeScripts();
+    mobileVersion((window.innerWidth<640));
+    
 });
 
+// Response to resize
+window.addEventListener('resize', ()=>{
+    mobileVersion((window.innerWidth<640));
+});
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
@@ -48,7 +52,20 @@ window.onclick = function(event) {
 }
 
 // FUNCTIONS
+function mobileVersion(bMobile) {
+    btnHeader = document.getElementById('header-btn') ;
+    navHeader = document.getElementById('header-nav') ;
+    divFooter = document.getElementById('footer');
 
+    if (bMobile) {
+        btnHeader.classList.remove('hidden');
+        navHeader.classList.add('dropdown-content');
+        
+    } else {
+        btnHeader.classList.add('hidden');
+        navHeader.classList.remove('dropdown-content');
+    }
+}
 function removeScripts() {
     let lScripts = document.scripts;
     if (localStorage.getItem('onlyEssentials')) {
@@ -68,7 +85,7 @@ function removeBanner() {
 }
 
 
-function dropdown() {
-    document.getElementById("myDropdown").classList.toggle("show");
+function dropdownHeader() {
+    document.getElementById("header-nav").classList.toggle("show");
 }
 

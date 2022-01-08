@@ -5,11 +5,14 @@
     
     <body>
         {% include header.html %}
-        
+        <div class="main-content">
+            {{ content }}
+
+        </div>
 
         <!--
-            {% include footer.html %}
-         -->
-         {% include cookiebanner.html %}
+        -->
+        {% include footer.html %}
+        {% include cookiebanner.html %}
     </body>
 </html>
